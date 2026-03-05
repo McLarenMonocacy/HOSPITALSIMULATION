@@ -35,4 +35,13 @@ public class Patient {
         //Note: stores the name in all lowercase to ignore case
         this.name = name.toLowerCase(Locale.US);
     }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "uuid=" + uuid +
+                ", name='" + name + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                '}';
+    }
 }
