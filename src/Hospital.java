@@ -1,5 +1,6 @@
 public class Hospital {
     private class LinkedPatient{
+        //This will be replaced
         Patient heldPatient;
         LinkedPatient nextLink = null;
 
@@ -19,5 +20,15 @@ public class Hospital {
         if (patient == null) return;
         if (patientList == null) patientList = new LinkedPatient(patient);
         else patientList.add(patient);
+    }
+
+    public int patientCount(){
+        LinkedPatient link = patientList;
+        int count = 0;
+        while (link != null){
+            count++;
+            link = link.nextLink;
+        }
+        return count;
     }
 }
