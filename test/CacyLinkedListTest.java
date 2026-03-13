@@ -22,6 +22,8 @@ class CacyLinkedListTest {
         assertEquals(3,list.length(), "List with three objects doesn't have length three");
         list.add(1);//add equal to first again
         assertEquals(4,list.length(), "List with four objects doesn't have length four");
+        list.add(null);//add null object
+        assertEquals(4,list.length(), "Null object was added to the list");
     }
 
     @Test
@@ -122,6 +124,8 @@ class CacyLinkedListTest {
         assertTrue(list.contains(1), "Contains didn't find first object");
         assertTrue(list.contains(2), "Contains didn't find middle object");
         assertTrue(list.contains(3), "Contains didn't find last object");
+        assertTrue(list.contains(4), "Contains found non-existent object");
+        assertTrue(list.contains(null), "Contains found null object");
     }
 
     @Test
@@ -161,6 +165,8 @@ class CacyLinkedListTest {
     void offer() {
         list.offer(5);
         assertEquals(1,list.length(), "Object was not put in queue");
+        list.offer(null);
+        assertEquals(1,list.length(), "Null object was put in queue");
     }
 
     @Test
