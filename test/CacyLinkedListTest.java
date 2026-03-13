@@ -1,0 +1,183 @@
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class CacyLinkedListTest {
+
+    static CacyLinkedList<Integer> list;
+
+    @BeforeEach
+    void setup(){
+        list = new CacyLinkedList<>();
+    }
+
+    @Test
+    void add() {
+        list.add(1);
+        assertEquals(1,list.length(), "List with one object doesn't have length one");
+        list.add(1);//add equal
+        assertEquals(2,list.length(), "List with two objects doesn't have length two");
+        list.add(2);//add unequal
+        assertEquals(3,list.length(), "List with three objects doesn't have length three");
+        list.add(1);//add equal to first again
+        assertEquals(4,list.length(), "List with four objects doesn't have length four");
+    }
+
+    @Test
+    void addFirst(){
+        list.add(1);
+        list.add(2);
+        list.addFirst(3);
+        assertEquals(3, list.first(), "Object added to front not first object");
+        assertNotEquals(1, list.first(), "Object added first was still first object");
+        assertEquals(2, list.last(), "Unexpected object at end of list");
+        assertNotEquals(3, list.last(), "Object added to front was still put at the end");
+
+    }
+
+    @Test
+    void remove() {
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.remove(2);
+        assertEquals(2, list.length(), "List starting with three objects with one removed doesn't have length two");
+        assertTrue(list.contains(1), "List doesn't contains non removed object (first)");
+        assertFalse(list.contains(2), "List still contains the removed object");
+        assertTrue(list.contains(3), "List doesn't contains non removed object (last)");
+        list.add(4);
+        list.remove(4);
+        assertEquals(2, list.length(), "List starting with three objects with one removed doesn't have length two");
+        assertTrue(list.contains(1), "List doesn't contains non removed object (first)");
+        assertTrue(list.contains(3), "List doesn't contains non removed object (middle)");
+        assertFalse(list.contains(4), "List still contains the removed object (last)");
+        list.add(5);
+        list.remove(1);
+        assertEquals(2, list.length(), "List starting with three objects with one removed doesn't have length two");
+        assertFalse(list.contains(1), "List still contains the removed object (first)");
+        assertTrue(list.contains(3), "List doesn't contains non removed object (middle)");
+        assertTrue(list.contains(5), "List doesn't contains non removed object (last)");
+    }
+
+    @Test
+    void removeFirst() {
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.removeFirst();
+        assertEquals(2, list.length(), "List starting with three objects with one removed doesn't have length two");
+        assertFalse(list.contains(1), "List still contains the removed object");
+        assertTrue(list.contains(2), "List doesn't contains non removed object (middle)");
+        assertTrue(list.contains(3), "List doesn't contains non removed object (last)");
+    }
+
+    @Test
+    void removeLast() {
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.removeLast();
+        assertEquals(2, list.length(), "List starting with three objects with one removed doesn't have length two");
+        assertTrue(list.contains(1), "List doesn't contains non removed object (first)");
+        assertTrue(list.contains(2), "List doesn't contains non removed object (middle)");
+        assertFalse(list.contains(3), "List still contains the removed object");
+    }
+
+    @Test
+    void first() {
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        assertEquals(1, list.first(), "First object not first object added");
+    }
+
+    @Test
+    void last() {
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        assertEquals(3, list.last(), "Last object not last object added");
+    }
+
+    @Test
+    void index() {
+        int reps = 10;
+        for (int i = 0; i < reps; i++) {
+            list.add(i);
+        }
+        for (int i = 0; i < reps; i++) {
+            assertEquals(i,list.index(i), "Object retrieved at index was not as expected");
+        }
+        assertNull(list.index(-1), "Negative index didn't give null");
+        assertNull(list.index(10), "Out of bounds index didn't give null");
+    }
+
+    @Test
+    void contains() {
+        list.add(1);
+        list.add(2);
+        list.add(3);
+
+        assertTrue(list.contains(1), "Contains didn't find first object");
+        assertTrue(list.contains(2), "Contains didn't find middle object");
+        assertTrue(list.contains(3), "Contains didn't find last object");
+    }
+
+    @Test
+    void length() {
+        assertEquals(0, list.length(), "Empty list doesn't have length zero");
+        list.add(1);
+        assertEquals(1, list.length(), "List of one object doesn't have length one");
+        list.add(2);
+        assertEquals(2, list.length(), "List of two objects doesn't have length two");
+        list.removeFirst();
+        assertEquals(1, list.length(), "List of one object doesn't have length one (2 -> 1)");
+    }
+
+    @Test
+    void initIterator() {
+        list.add(1);
+        list.add(2);
+        list.add(1);
+        list.add(3);
+
+        assertNull(list.next(), "Uninitiated iterator giving non null values");
+        assertFalse(list.hasNext(), "hasNext() returning true on uninitiated iterator");
+        list.initIterator();
+        assertTrue(list.hasNext(), "hasNext() returning false with un-iterated objects left");
+        assertEquals(1, list.next(), "First iteration not returning first value");
+        assertTrue(list.hasNext(), "hasNext() returning false with un-iterated objects left");
+        assertEquals(2, list.next(), "Second iteration not returning second value");
+        assertTrue(list.hasNext(), "hasNext() returning false with un-iterated objects left");
+        assertEquals(1, list.next(), "Third iteration not returning third value");
+        assertTrue(list.hasNext(), "hasNext() returning false with un-iterated objects left");
+        assertEquals(3, list.next(), "Forth iteration not returning forth value");
+        assertFalse(list.hasNext(), "hasNext() returning true with no objects left");
+        assertNull(list.next(), "Iterating with no more values not returning null");
+    }
+
+    @Test
+    void offer() {
+        list.offer(5);
+        assertEquals(1,list.length(), "Object was not put in queue");
+    }
+
+    @Test
+    void poll() {
+        assertNull(list.poll(), "Empty queue not returning null");
+        list.offer(5);
+        assertEquals(5,list.poll(), "Wrong object returned");
+        assertEquals(0,list.length(), "Object was not removed from queue");
+        assertNull(list.poll(), "Empty queue not returning null");
+    }
+
+    @Test
+    void peek() {
+        assertNull(list.poll(), "Empty queue not returning null");
+        list.offer(5);
+        assertEquals(5,list.peek(), "Wrong object returned");
+        assertEquals(1,list.length(), "Object was removed from queue");
+
+    }
+}

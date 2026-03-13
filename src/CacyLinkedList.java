@@ -9,7 +9,7 @@ public class CacyLinkedList<T> implements CacyQueue<T> {
     }
 
     private Record head;
-
+    private Record iterator;
 
     public void add (T t){
         if (t == null) return;
@@ -22,6 +22,13 @@ public class CacyLinkedList<T> implements CacyQueue<T> {
     private void add(Record record, T t) {
         if (record.nextRecord != null) add(record.nextRecord, t);
         else record.nextRecord = new Record(t);
+    }
+
+    public void addFirst(T t){
+        //Adds the object at the beginning of the list
+        Record record = new Record(t);
+        record.nextRecord = head;
+        head = record;
     }
 
     public void remove(T t) {
@@ -99,6 +106,24 @@ public class CacyLinkedList<T> implements CacyQueue<T> {
     private int length(Record record){
         if (record == null) return 0; //We aren't a record and thus are zero
         return length(record.nextRecord) + 1;//We are a record, add ourselves to the count
+    }
+
+    public void initIterator(){
+        //Sets the iterator to the start of the list
+        iterator = head;
+    }
+
+    public T next(){
+        //Returns the next item in the list, null if at the end
+        if (iterator == null) return null;
+        T output = iterator.t;
+        iterator = iterator.nextRecord;
+        return output;
+    }
+
+    public boolean hasNext(){
+        //returns true if the iterator has more elements (i.e. next() != null)
+        return iterator != null;
     }
 
     @Override
