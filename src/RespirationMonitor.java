@@ -1,7 +1,7 @@
-import java.util.Random;
+   import java.util.Random;
 
-public class TemperatureMonitor extends Device{
-    private double value = 36.5;
+public class RespirationMonitor extends Device{
+    private int value = 16;
     private Random random = new Random();
     
     public Observation sample(){
@@ -10,9 +10,10 @@ public class TemperatureMonitor extends Device{
         return new Temperature(value);
     }
 
-    public double seededSample(Random rng){
+    public Observation seededSample(Random rng){
         double change = 3 - rng.nextDouble(6);
         value += change;
-        return value;
+        return new RespiratoryRate(value);
     }
 }
+
