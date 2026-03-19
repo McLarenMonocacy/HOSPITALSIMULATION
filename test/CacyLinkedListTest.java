@@ -124,7 +124,7 @@ class CacyLinkedListTest {
         assertTrue(list.contains(1), "Contains didn't find first object");
         assertTrue(list.contains(2), "Contains didn't find middle object");
         assertTrue(list.contains(3), "Contains didn't find last object");
-        assertTrue(list.contains(4), "Contains found non-existent object");
+        assertFalse(list.contains(4), "Contains found non-existent object");
         assertTrue(list.contains(null), "Contains found null object");
     }
 
