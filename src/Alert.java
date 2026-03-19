@@ -12,4 +12,8 @@ public class Alert{
         }
         else urgent = false;
     }
+
+    public toString(){
+        return "Start Time: " + startTime + " End Time: " + endTime + " Urgent: " + urgent; 
+    }
 }
