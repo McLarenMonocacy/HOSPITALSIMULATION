@@ -7,8 +7,18 @@ public class Patient {
     private String name;
     private Date dateOfBirth;
 
+    private CacyLinkedList<Device> deviceList;
+
     public Patient(){
         uuid = generateUUID();
+        deviceList = new CacyLinkedList<>();
+        //Default values for name & DoB
+        name = "John Doe";
+        dateOfBirth = new Date(0L);
+    }
+
+    public void addDevice(Device device){
+        deviceList.add(device);
     }
 
     private static UUID generateUUID(){
@@ -35,6 +45,18 @@ public class Patient {
         //Note: stores the name in all lowercase to ignore case
         this.name = name.toLowerCase(Locale.US);
     }
+
+    public static Patient Create(){
+        Patient patient = new Patient();
+
+        patient.addDevice(new HeartRateMonitor());
+        patient.addDevice(new OxygenSaturationMonitor());
+        patient.addDevice(new RespirationMonitor());
+        patient.addDevice(new TemperatureMonitor());
+
+        return patient;
+    }
+
 
     @Override
     public String toString() {
