@@ -7,7 +7,7 @@ public class Patient {
     private String name;
     private Date dateOfBirth;
 
-    private CacyLinkedList<Device> deviceList;
+    private final CacyLinkedList<Device> deviceList;
 
     public Patient(){
         uuid = generateUUID();
@@ -46,7 +46,11 @@ public class Patient {
         this.name = name.toLowerCase(Locale.US);
     }
 
-    public static Patient Create(){
+    public CacyLinkedList<Device> getDeviceList() {
+        return deviceList;
+    }
+
+    public static Patient create(){
         Patient patient = new Patient();
 
         patient.addDevice(new HeartRateMonitor());
