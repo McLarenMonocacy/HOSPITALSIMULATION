@@ -31,6 +31,6 @@ class PatientTest {
     void getUuid() {
         Patient patient = new Patient();
         Patient patient1 = new Patient();
-        assertNotSame(patient.getUuid(), patient1.getUuid());
+        assertNotSame(patient.getUuid(), patient1.getUuid(), "Duplicate UUIDs in different patients");
     }
 }
