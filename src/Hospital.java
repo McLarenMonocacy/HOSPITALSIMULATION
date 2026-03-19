@@ -3,6 +3,10 @@ public class Hospital {
     CacyLinkedList<Patient> patientList;
     //List of nurses will need to be added later
 
+    public Hospital(){
+        patientList = new CacyLinkedList<>();
+    }
+
     public void addPatient(Patient patient){
         patientList.add(patient);
     }
