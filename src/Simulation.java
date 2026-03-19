@@ -47,4 +47,7 @@ public class Simulation {
     public static double random(){
         return random.nextDouble();
     }
+    public static double random(double bounds){
+        return random.nextDouble(bounds);
+    }
 }
