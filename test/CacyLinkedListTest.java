@@ -103,19 +103,6 @@ class CacyLinkedListTest {
     }
 
     @Test
-    void index() {
-        int reps = 10;
-        for (int i = 0; i < reps; i++) {
-            list.add(i);
-        }
-        for (int i = 0; i < reps; i++) {
-            assertEquals(i,list.index(i), "Object retrieved at index was not as expected");
-        }
-        assertNull(list.index(-1), "Negative index didn't give null");
-        assertNull(list.index(10), "Out of bounds index didn't give null");
-    }
-
-    @Test
     void contains() {
         list.add(1);
         list.add(2);
@@ -159,31 +146,5 @@ class CacyLinkedListTest {
         assertEquals(3, list.next(), "Forth iteration not returning forth value");
         assertFalse(list.hasNext(), "hasNext() returning true with no objects left");
         assertNull(list.next(), "Iterating with no more values not returning null");
-    }
-
-    @Test
-    void offer() {
-        list.offer(5);
-        assertEquals(1,list.length(), "Object was not put in queue");
-        list.offer(null);
-        assertEquals(1,list.length(), "Null object was put in queue");
-    }
-
-    @Test
-    void poll() {
-        assertNull(list.poll(), "Empty queue not returning null");
-        list.offer(5);
-        assertEquals(5,list.poll(), "Wrong object returned");
-        assertEquals(0,list.length(), "Object was not removed from queue");
-        assertNull(list.poll(), "Empty queue not returning null");
-    }
-
-    @Test
-    void peek() {
-        assertNull(list.poll(), "Empty queue not returning null");
-        list.offer(5);
-        assertEquals(5,list.peek(), "Wrong object returned");
-        assertEquals(1,list.length(), "Object was removed from queue");
-
     }
 }

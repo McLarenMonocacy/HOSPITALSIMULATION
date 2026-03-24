@@ -1,4 +1,4 @@
-public class CacyLinkedList<T> implements CacyQueue<T> {
+public class CacyLinkedList<T>{
     private class Record{
         T t;
         Record nextRecord;
@@ -9,19 +9,19 @@ public class CacyLinkedList<T> implements CacyQueue<T> {
     }
 
     private Record head;
+    private Record tail;
     private Record iterator;
 
     public void add (T t){
         if (t == null) return;
-        if (head == null) {
-            head = new Record(t);
-            return;
+        Record newRecord = new Record(t);
+        if (head == null){
+            head = newRecord;
         }
-        add(head,t);
-    }
-    private void add(Record record, T t) {
-        if (record.nextRecord != null) add(record.nextRecord, t);
-        else record.nextRecord = new Record(t);
+        else {
+            tail.nextRecord = newRecord;
+        }
+        tail = newRecord;
     }
 
     public void addFirst(T t){
@@ -43,7 +43,7 @@ public class CacyLinkedList<T> implements CacyQueue<T> {
         return record; //This record wasn't equal, return self
     }
 
-    public T removeFirst(){
+    public T removeFirst(){ //NOTE: EITHER BOTH RETURN T OR NEITHER
         //Removes the first object in the list and returns it
         if (head == null) return null;
         T output = head.t;
@@ -70,23 +70,8 @@ public class CacyLinkedList<T> implements CacyQueue<T> {
 
     public T last(){
         //Returns the last object in the list
-        if (head == null) return null;
-        return last(head);
-    }
-    private T last(Record rootRecord){
-        if (rootRecord.nextRecord == null) return rootRecord.t; //We are last record, return stored object
-        return last(rootRecord.nextRecord); //We aren't last record, return the next record's result
-    }
-
-    public T index(int index){
-        //Returns the object in the nth spot in the list, returns null if out of bounds
-        if (index < 0) return null; //Negative index is out of bounds
-        return index(head, index);
-    }
-    private T index(Record record, int index){
-        if (record == null) return null; //We are null, return null
-        if (index == 0) return record.t; //We are the index, return stored value
-        return index(record.nextRecord, index-1); //We aren't the index, return the next record's result
+        if (tail == null) return null;
+        return tail.t;
     }
 
     public boolean contains(T t){
@@ -124,20 +109,5 @@ public class CacyLinkedList<T> implements CacyQueue<T> {
     public boolean hasNext(){
         //returns true if the iterator has more elements (i.e. next() != null)
         return iterator != null;
-    }
-
-    @Override
-    public void offer(T t) {
-        add(t);
-    }
-
-    @Override
-    public T poll() {
-        return removeFirst();
-    }
-
-    @Override
-    public T peek() {
-        return first();
     }
 }
