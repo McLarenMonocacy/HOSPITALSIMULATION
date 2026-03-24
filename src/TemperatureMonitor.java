@@ -2,17 +2,10 @@ import java.util.Random;
 
 public class TemperatureMonitor extends Device{
     private double value = 36.5;
-    private Random random = new Random();
     
     public Observation sample(){
-        double change = 3 - random.nextDouble(6);
+        double change = 3 - Simulation.random(6);
         value += change;
         return new Temperature(value);
-    }
-
-    public double seededSample(Random rng){
-        double change = 3 - rng.nextDouble(6);
-        value += change;
-        return value;
     }
 }
