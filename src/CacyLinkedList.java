@@ -25,6 +25,7 @@ public class CacyLinkedList<T>{
     }
 
     public void addFirst(T t){
+        if (t == null) return;
         //Adds the object at the beginning of the list
         Record newRecord = new Record(t);
         newRecord.nextRecord = head;
