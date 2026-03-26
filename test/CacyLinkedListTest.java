@@ -36,6 +36,11 @@ class CacyLinkedListTest {
         assertEquals(2, list.last(), "Unexpected object at end of list");
         assertNotEquals(3, list.last(), "Object added to front was still put at the end");
 
+        list.addFirst(null);
+        assertEquals(3, list.length(), "Adding null should not change the list");
+        assertEquals(3, list.first(), "Adding null should not change the list");
+        assertEquals(2, list.last(), "Adding null should not change the list");
+
     }
 
     @Test
@@ -48,18 +53,33 @@ class CacyLinkedListTest {
         assertTrue(list.contains(1), "List doesn't contains non removed object (first)");
         assertFalse(list.contains(2), "List still contains the removed object");
         assertTrue(list.contains(3), "List doesn't contains non removed object (last)");
+
         list.add(4);
         list.remove(4);
         assertEquals(2, list.length(), "List starting with three objects with one removed doesn't have length two");
         assertTrue(list.contains(1), "List doesn't contains non removed object (first)");
         assertTrue(list.contains(3), "List doesn't contains non removed object (middle)");
         assertFalse(list.contains(4), "List still contains the removed object (last)");
+
         list.add(5);
         list.remove(1);
         assertEquals(2, list.length(), "List starting with three objects with one removed doesn't have length two");
         assertFalse(list.contains(1), "List still contains the removed object (first)");
         assertTrue(list.contains(3), "List doesn't contains non removed object (middle)");
         assertTrue(list.contains(5), "List doesn't contains non removed object (last)");
+
+        list.add(6);
+        list.remove(null);
+        assertEquals(3, list.length(), "Removing null shouldn't change the list size");
+        assertTrue(list.contains(3), "List doesn't contains non removed object (first)");
+        assertTrue(list.contains(5), "List doesn't contains non removed object (middle)");
+        assertTrue(list.contains(6), "List doesn't contains non removed object (last)");
+
+        list.remove(7);
+        assertEquals(3, list.length(), "Removing an object not in the list shouldn't change the list size");
+        assertTrue(list.contains(3), "List doesn't contains non removed object (first)");
+        assertTrue(list.contains(5), "List doesn't contains non removed object (middle)");
+        assertTrue(list.contains(6), "List doesn't contains non removed object (last)");
     }
 
     @Test
@@ -72,6 +92,18 @@ class CacyLinkedListTest {
         assertFalse(list.contains(1), "List still contains the removed object");
         assertTrue(list.contains(2), "List doesn't contains non removed object (middle)");
         assertTrue(list.contains(3), "List doesn't contains non removed object (last)");
+
+        list.removeFirst();
+        assertEquals(1, list.length(), "List starting with two objects with one removed doesn't have length one");
+        assertFalse(list.contains(2), "List still contains the removed object");
+        assertTrue(list.contains(3), "List doesn't contains non removed object (last)");
+
+        list.removeFirst();
+        assertEquals(0, list.length(), "List starting with one objects with one removed doesn't have length zero");
+        assertFalse(list.contains(3), "List still contains the removed object");
+
+        list.removeFirst();
+        assertEquals(0, list.length(), "RemoveFirst shouldn't do anything on an empty list");
     }
 
     @Test
@@ -84,12 +116,26 @@ class CacyLinkedListTest {
         assertTrue(list.contains(1), "List doesn't contains non removed object (first)");
         assertTrue(list.contains(2), "List doesn't contains non removed object (middle)");
         assertFalse(list.contains(3), "List still contains the removed object");
+
+        list.removeLast();
+        assertEquals(1, list.length(), "List starting with two objects with one removed doesn't have length one");
+        assertTrue(list.contains(1), "List doesn't contains non removed object (first)");
+        assertFalse(list.contains(2), "List still contains the removed object");
+
+        list.removeLast();
+        assertEquals(0, list.length(), "List starting with one objects with one removed doesn't have length zero");
+        assertFalse(list.contains(1), "List still contains the removed object");
+
+        list.removeLast();
+        assertEquals(0, list.length(), "RemoveLast shouldn't do anything on an empty list");
     }
 
     @Test
     void first() {
         list.add(1);
+        assertEquals(1, list.first(), "First object not first object added");
         list.add(2);
+        assertEquals(1, list.first(), "First object not first object added");
         list.add(3);
         assertEquals(1, list.first(), "First object not first object added");
     }
@@ -97,7 +143,9 @@ class CacyLinkedListTest {
     @Test
     void last() {
         list.add(1);
+        assertEquals(1, list.last(), "Last object not last object added");
         list.add(2);
+        assertEquals(2, list.last(), "Last object not last object added");
         list.add(3);
         assertEquals(3, list.last(), "Last object not last object added");
     }
