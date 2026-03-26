@@ -13,7 +13,7 @@ public class CacyLinkedList<T>{
     private Record iterator;
 
     public void add (T t){
-        if (t == null) return;
+        if (t == null) return; //Don't allow null objects to be added
         Record newRecord = new Record(t);
         if (head == null){
             head = newRecord;
@@ -26,40 +26,54 @@ public class CacyLinkedList<T>{
 
     public void addFirst(T t){
         //Adds the object at the beginning of the list
-        Record record = new Record(t);
-        record.nextRecord = head;
-        head = record;
+        Record newRecord = new Record(t);
+        newRecord.nextRecord = head;
+        head = newRecord;
     }
 
     public void remove(T t) {
-        //Removes the first object in the list that is equal, does nothing if no objects match
-        head = remove(head, t);
+        if (t == null) return; //Cannot remove null
+        head = remove(head,t);
+        if (head == null) tail = null;
     }
-    private Record remove(Record record, T t){
-        //Removes the record with a matching object by returning the next record in the list
-        if (record == null) return null; //We are null, return self
-        if (record.t.equals(t)) return record.nextRecord; //We are equal, return next record
-        record.nextRecord = remove(record.nextRecord, t);//We aren't equal, check next record
-        return record; //This record wasn't equal, return self
+    private Record remove(Record recordToCheck, T t){
+        if (recordToCheck.t.equals(t)) return recordToCheck.nextRecord; //We are the record to remove and thus the previous record's next record should be our next record
+        if (recordToCheck.nextRecord != null){ //If the next record is null then were are at the end of the list and have nothing left to check
+            Record result = remove(recordToCheck.nextRecord, t); //Check the next record
+            if (result == null) tail = recordToCheck; //We get null if the next record is both the record to remove and the tail thus we are the new tail
+            recordToCheck.nextRecord = result;
+        }
+        return recordToCheck; //We aren't the record to remove and thus should stay as the previous record's next record
     }
 
-    public T removeFirst(){ //NOTE: EITHER BOTH RETURN T OR NEITHER
-        //Removes the first object in the list and returns it
+    public T removeFirst(){
+        //Removes the first object in the list
         if (head == null) return null;
         T output = head.t;
         head = head.nextRecord;
+        if (head == null) tail = null;
         return output;
     }
 
-    public void removeLast(){
-        //Removes the last object in the list and returns it
-        if (head == null) return;
-        head = removeLast(head);
+    public T removeLast(){
+        //Removes the last object in the list
+        if (tail == null) return null;
+        T output = tail.t;
+        if (removeLast(head,tail)){//If true then the last record is also the first
+            head = null;
+            tail = null;
+        }
+        return output;
     }
-    private Record removeLast(Record record){
-        if (record.nextRecord == null) return null; //We are last, return null to remove ourself as the next record
-        record.nextRecord = removeLast(record.nextRecord); //We are not last, check the next record
-        return record; //Return our self to stay as the next record
+    private boolean removeLast(Record recordToCheck, Record recordToRemove){
+        if (recordToCheck == recordToRemove) {
+            return true;
+        }
+        if (removeLast(recordToCheck.nextRecord, recordToRemove)){
+            recordToCheck.nextRecord = null;
+            tail = recordToCheck;
+        }
+        return false;
     }
 
     public T first(){
