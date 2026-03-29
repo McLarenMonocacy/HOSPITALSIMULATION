@@ -1,12 +1,19 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Random;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class DivTemperatureMonitorTest {
+class DivTemperatureMonitorTest {
+
+    @BeforeEach
+    void preTest(){
+        Simulation sim = new Simulation();
+        sim.setup();
+    }
+
     @Test
-    void consistentNum(){
-        DivTemperatureMonitor monitor = new DivTemperatureMonitor();
-        Random rand = new Random(12345);
-        assertEquals(37.32918135703717, monitor.seededSample(rand));
+    void sample() {
+        DivTemperatureMonitor device = new DivTemperatureMonitor();
+        assertEquals(Observation.class, device.sample().getClass().getSuperclass(), "Sample didn't return an observation");
     }
 }
