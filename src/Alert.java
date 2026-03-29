@@ -1,19 +1,23 @@
 public class Alert{
-    private double startTime;
+    private final double startTime;
     private double endTime;
-    private Observation data;
-    private boolean urgent;
+    private boolean resolved = false;
+
+    private final Observation data;
+    private final int priority;
 
     public Alert(double start, Observation obs){
         startTime = start;
         data = obs;
-        if (obs.veryDangerous()){
-            urgent = true;
-        }
-        else urgent = false;
+        priority = obs.getPriority();
     }
 
-    public toString(){
-        return "Start Time: " + startTime + " End Time: " + endTime + " Urgent: " + urgent; 
+    public void resolve(double time){
+        if (resolved) return;
+        endTime = time;
+    }
+
+    public String toString(){
+        return "Start Time: " + startTime + " End Time: " + endTime + " Priority: " + priority;
     }
 }
