@@ -13,8 +13,18 @@ public class Alert{
     }
 
     public void resolve(double time){
+        //Should we check if the resolved time is after the start time (i.e. prevent the end time from being before the start time)?
         if (resolved) return;
         endTime = time;
+        resolved = true;
+    }
+
+    public double getStartTime() {
+        return startTime;
+    }
+
+    public double getEndTime() {
+        return endTime;
     }
 
     public String toString(){
