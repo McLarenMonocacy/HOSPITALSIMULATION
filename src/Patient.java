@@ -17,6 +17,18 @@ public class Patient {
         dateOfBirth = new Date(0L);
     }
 
+    public CacyQueue<Alert> pollDevices(){
+        CacyQueue<Alert> output = new CacyLinkedList<>();
+        deviceList.initIterator();
+        while (deviceList.hasNext()){
+            Observation observation = deviceList.next().sample();
+            if (observation.dangerous()){
+                output.offer(new Alert(Main.getSim().getCurrentTime(), observation));
+            }
+        }
+        return output;
+    }
+
     public void addDevice(Device device){
         deviceList.add(device);
     }

@@ -9,6 +9,7 @@ public class Simulation {
     private Hospital hospital;
     private Double runTime, currentTime;
 
+
     public Simulation(){
     }
 
@@ -21,6 +22,7 @@ public class Simulation {
         this.runTime = runTime;
         currentTime = 0d;
 
+
         hasSetupRun = true;
     }
 
@@ -28,7 +30,8 @@ public class Simulation {
         if (!hasSetupRun) return;
 
         while (currentTime < runTime){
-            //Simulate here
+            hospital.pollDevices();
+            currentTime++; //Temp time advance until a proper solution
         }
 
         hasSimulationRun = true;
@@ -40,8 +43,12 @@ public class Simulation {
     }
 
 
+
     public Hospital getHospital() {
         return hospital;
+    }
+    public double getCurrentTime(){
+        return currentTime;
     }
 
     public static double random(){
@@ -53,4 +60,6 @@ public class Simulation {
     public static int randomInt(int minValue, int maxValue){
         return random.nextInt(minValue, maxValue + 1);
     }
+
+
 }

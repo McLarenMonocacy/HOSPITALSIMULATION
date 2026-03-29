@@ -27,6 +27,10 @@ public class Alert{
         return endTime;
     }
 
+    public int getPriority() {
+        return priority;
+    }
+
     public String toString(){
         return "Start Time: " + startTime + " End Time: " + endTime + " Priority: " + priority;
     }
