@@ -53,10 +53,11 @@ public class Patient {
     public static Patient create(){
         Patient patient = new Patient();
 
-        patient.addDevice(new HeartRateMonitor());
-        patient.addDevice(new OxygenSaturationMonitor());
-        patient.addDevice(new RespirationMonitor());
-        patient.addDevice(new TemperatureMonitor());
+        patient.addDevice(new DivHeartRateMonitor());
+        patient.addDevice(new DivOxygenSaturationMonitor());
+        patient.addDevice(new DivRespirationMonitor());
+        patient.addDevice(new DivTemperatureMonitor());
+        patient.addDevice(new DivCallBell());
 
         return patient;
     }

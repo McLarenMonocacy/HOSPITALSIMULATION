@@ -1,12 +1,11 @@
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 import java.util.Random;
 
-public class TemperatureMonitorTest {
+public class DivTemperatureMonitorTest {
     @Test
     void consistentNum(){
-        TemperatureMonitor monitor = new TemperatureMonitor();
+        DivTemperatureMonitor monitor = new DivTemperatureMonitor();
         Random rand = new Random(12345);
         assertEquals(37.32918135703717, monitor.seededSample(rand));
     }

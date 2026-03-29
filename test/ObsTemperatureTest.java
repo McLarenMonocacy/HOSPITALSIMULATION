@@ -2,16 +2,16 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TemperatureTest {
+public class ObsTemperatureTest {
     @Test
     void dangerousHigh(){
-        Temperature temp = new Temperature(50);
+        ObsTemperature temp = new ObsTemperature(50);
         assertTrue(temp.dangerous());
     }
 
     @Test
     void dangerousLow(){
-        Temperature temp = new Temperature(20);
+        ObsTemperature temp = new ObsTemperature(20);
         assertTrue(temp.dangerous());
     }
 }

@@ -1,12 +1,10 @@
-   import java.util.Random;
-
-public class RespirationMonitor extends Device{
+public class DivRespirationMonitor extends Device{
     private int value = 16;
     
     public Observation sample(){
         double change = 3 - Simulation.random(6);
         value += change;
-        return new Temperature(value);
+        return new ObsTemperature(value);
     }
 }
 

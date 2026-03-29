@@ -1,11 +1,9 @@
-import java.util.Random;
-
-public class HeartRateMonitor extends Device{
+public class DivHeartRateMonitor extends Device{
     private double value = 80;
     
     public Observation sample(){
         double change = 10 - Simulation.random(20);
         value += change;
-        return new Temperature(value);
+        return new ObsTemperature(value);
     }
 }

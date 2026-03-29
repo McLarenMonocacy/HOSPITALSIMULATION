@@ -1,7 +1,7 @@
-public class Temperature extends Observation{
+public class ObsTemperature extends Observation{
     private double celsiusValue;
 
-    public Temperature (double cVal){
+    public ObsTemperature(double cVal){
         celsiusValue = cVal;
     }
 

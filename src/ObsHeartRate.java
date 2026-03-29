@@ -1,7 +1,7 @@
-public class HeartRate extends Observation{
+public class ObsHeartRate extends Observation{
     private double bpm;
     
-    public HeartRate(double beats){
+    public ObsHeartRate(double beats){
         bpm = beats;
     }
 

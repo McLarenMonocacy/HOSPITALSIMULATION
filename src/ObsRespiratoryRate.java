@@ -1,7 +1,7 @@
-public class RespiratoryRate extends Observation{
+public class ObsRespiratoryRate extends Observation{
     private int bpm;
 
-    public RespiratoryRate(int breaths){
+    public ObsRespiratoryRate(int breaths){
         bpm = breaths;
     }
     

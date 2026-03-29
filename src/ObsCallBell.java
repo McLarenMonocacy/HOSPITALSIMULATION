@@ -1,8 +1,8 @@
-public class CallBellCall extends Observation{ //Rename this class
+public class ObsCallBell extends Observation{ //Rename this class
 
     Boolean called;
 
-    public CallBellCall(Boolean called){
+    public ObsCallBell(Boolean called){
         this.called = called;
     }
 

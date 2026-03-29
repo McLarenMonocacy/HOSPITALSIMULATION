@@ -38,7 +38,7 @@ class PatientTest {
     void addDevice(){
         Patient patient = new Patient();
         assertEquals(0, patient.getDeviceList().length(), "Device list should be empty");
-        patient.addDevice(new TemperatureMonitor());
+        patient.addDevice(new DivTemperatureMonitor());
         assertEquals(1, patient.getDeviceList().length(), "Device list has no devices");
     }
 

@@ -1,7 +1,7 @@
-public class OxygenSaturation extends Observation{
+public class ObsOxygenSaturation extends Observation{
     private double saturation;
 
-    public OxygenSaturation(double satur){
+    public ObsOxygenSaturation(double satur){
         saturation = satur;
     }
 
