@@ -33,4 +33,18 @@ class PatientTest {
         Patient patient1 = new Patient();
         assertNotSame(patient.getUuid(), patient1.getUuid(), "Duplicate UUIDs in different patients");
     }
+
+    @Test
+    void addDevice(){
+        Patient patient = new Patient();
+        assertEquals(0, patient.getDeviceList().length(), "Device list should be empty");
+        patient.addDevice(new DivTemperatureMonitor());
+        assertEquals(1, patient.getDeviceList().length(), "Device list has no devices");
+    }
+
+    @Test
+    void create(){
+        Patient patient = Patient.create();
+        assertTrue(patient.getDeviceList().length() != 0, "Device list has no devices");
+    }
 }
