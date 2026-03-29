@@ -3,6 +3,7 @@ public class ObsTemperature extends Observation{
 
     public ObsTemperature(double cVal){
         celsiusValue = cVal;
+        priority = 3;
     }
 
     public boolean dangerous(){

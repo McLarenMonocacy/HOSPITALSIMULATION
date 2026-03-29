@@ -4,6 +4,7 @@ public class ObsCallBell extends Observation{ //Rename this class
 
     public ObsCallBell(Boolean called){
         this.called = called;
+        priority = 1;
     }
 
     @Override

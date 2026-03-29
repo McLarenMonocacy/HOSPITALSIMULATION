@@ -3,6 +3,7 @@ public class ObsRespiratoryRate extends Observation{
 
     public ObsRespiratoryRate(int breaths){
         bpm = breaths;
+        priority = 4;
     }
     
     public boolean dangerous(){

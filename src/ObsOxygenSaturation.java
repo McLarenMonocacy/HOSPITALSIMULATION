@@ -3,6 +3,7 @@ public class ObsOxygenSaturation extends Observation{
 
     public ObsOxygenSaturation(double satur){
         saturation = satur;
+        priority = 3;
     }
 
     public boolean dangerous(){

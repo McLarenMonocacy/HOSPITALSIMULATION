@@ -3,6 +3,7 @@ public class ObsHeartRate extends Observation{
     
     public ObsHeartRate(double beats){
         bpm = beats;
+        priority = 4;
     }
 
     public boolean dangerous(){
