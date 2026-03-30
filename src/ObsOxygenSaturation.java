@@ -1,8 +1,8 @@
 public class ObsOxygenSaturation extends Observation{
     private double saturation;
 
-    public ObsOxygenSaturation(double satur){
-        saturation = satur;
+    public ObsOxygenSaturation(double saturation){
+        this.saturation = saturation;
         priority = 3;
     }
 
