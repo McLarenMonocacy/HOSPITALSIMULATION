@@ -4,6 +4,6 @@ public class DivHeartRateMonitor extends Device{
     public Observation sample(){
         double change = 10 - Simulation.random(20);
         value += change;
-        return new ObsTemperature(value);
+        return new ObsHeartRate(value);
     }
 }

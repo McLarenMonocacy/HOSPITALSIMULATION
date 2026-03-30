@@ -4,7 +4,7 @@ public class DivRespirationMonitor extends Device{
     public Observation sample(){
         double change = 3 - Simulation.random(6);
         value += change;
-        return new ObsTemperature(value);
+        return new ObsRespiratoryRate(value);
     }
 }
 

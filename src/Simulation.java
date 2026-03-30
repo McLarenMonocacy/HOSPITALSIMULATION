@@ -60,6 +60,9 @@ public class Simulation {
     public static int randomInt(int minValue, int maxValue){
         return random.nextInt(minValue, maxValue + 1);
     }
+    public static int randomInt(int maxValue){
+        return random.nextInt(maxValue+1);
+    }
 
 
 }
