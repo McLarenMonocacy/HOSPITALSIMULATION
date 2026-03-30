@@ -70,6 +70,7 @@ public class Patient {
         patient.addDevice(new DivRespirationMonitor());
         patient.addDevice(new DivTemperatureMonitor());
         patient.addDevice(new DivCallBell());
+        patient.addDevice(new DivBloodPressure());
 
         return patient;
     }
