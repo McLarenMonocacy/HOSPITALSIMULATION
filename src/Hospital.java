@@ -1,6 +1,6 @@
 public class Hospital {
 
-    CacyLinkedList<Patient> patientList;
+    private final CacyLinkedList<Patient> patientList;
     //List of nurses will need to be added later
     //I would put this in an array but java doesn't seam to like that
     private final CacyQueue<Alert> alertQueuePriority1;
@@ -10,6 +10,7 @@ public class Hospital {
     private final CacyQueue<Alert> alertQueuePriority5;
 
     public Hospital(){
+        patientList = new CacyLinkedList<>();
         //This will need to be updated with the new separate queue class
         alertQueuePriority1 = new CacyLinkedList<>();
         alertQueuePriority2 = new CacyLinkedList<>();

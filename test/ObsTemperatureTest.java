@@ -11,7 +11,7 @@ public class ObsTemperatureTest {
 
     @Test
     void notDangerous(){
-        Observation observation = new ObsTemperature(35);
+        Observation observation = new ObsTemperature(37);
         assertFalse(observation.dangerous(), "In range temperature considered dangerous");
     }
 
@@ -25,5 +25,7 @@ public class ObsTemperatureTest {
     void priority(){
         Observation observation = new ObsTemperature(1);
         assertEquals(3, observation.getPriority(), "Priority not expected value");
+        observation = new ObsTemperature(100);
+        assertEquals(4, observation.getPriority(), "Priority was not elevated to expected value");
     }
 }

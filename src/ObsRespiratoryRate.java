@@ -5,9 +5,10 @@ public class ObsRespiratoryRate extends Observation{
         bpm = breaths;
         priority = 4;
     }
-    
+
+    //Source:https://www.lung.org/blog/respiratory-rate-vital-signs
     public boolean dangerous(){
-        return bpm < 12 || bpm > 20;
+        return bpm < 12 || bpm > 25;
     }
 
     public String data(){
