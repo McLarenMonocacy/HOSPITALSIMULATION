@@ -19,6 +19,10 @@ public class Hospital {
         alertQueuePriority5 = new CacyLinkedList<>();
     }
 
+    public Hospital(){
+        patientList = new CacyLinkedList<>();
+    }
+
     public void addPatient(Patient patient){
         patientList.add(patient);
     }
