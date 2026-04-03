@@ -18,12 +18,12 @@ public class Patient {
     }
 
     public CacyQueue<Alert> pollDevices(){
-        CacyQueue<Alert> output = new CacyLinkedList<>();
+        CacyQueue<Alert> output = new CacyQueue<>();
         deviceList.initIterator();
         while (deviceList.hasNext()){
             Observation observation = deviceList.next().sample();
             if (observation.dangerous()){
-                output.offer(new Alert(Main.getSim().getCurrentTime(), observation));
+                output.queue(new Alert(Main.getSim().getCurrentTime(), observation));
             }
         }
         return output;

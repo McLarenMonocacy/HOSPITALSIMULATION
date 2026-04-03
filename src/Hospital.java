@@ -12,15 +12,11 @@ public class Hospital {
     public Hospital(){
         patientList = new CacyLinkedList<>();
         //This will need to be updated with the new separate queue class
-        alertQueuePriority1 = new CacyLinkedList<>();
-        alertQueuePriority2 = new CacyLinkedList<>();
-        alertQueuePriority3 = new CacyLinkedList<>();
-        alertQueuePriority4 = new CacyLinkedList<>();
-        alertQueuePriority5 = new CacyLinkedList<>();
-    }
-
-    public Hospital(){
-        patientList = new CacyLinkedList<>();
+        alertQueuePriority1 = new CacyQueue<>();
+        alertQueuePriority2 = new CacyQueue<>();
+        alertQueuePriority3 = new CacyQueue<>();
+        alertQueuePriority4 = new CacyQueue<>();
+        alertQueuePriority5 = new CacyQueue<>();
     }
 
     public void addPatient(Patient patient){
@@ -33,13 +29,13 @@ public class Hospital {
         while (patientList.hasNext()){
             CacyQueue<Alert> receivedAlerts = patientList.next().pollDevices();
             while (receivedAlerts.peek() != null){
-                Alert alert = receivedAlerts.poll();
+                Alert alert = receivedAlerts.dequeue();
                 switch (alert.getPriority()){
-                    case 1: alertQueuePriority1.offer(alert); break;
-                    case 2: alertQueuePriority2.offer(alert); break;
-                    case 3: alertQueuePriority3.offer(alert); break;
-                    case 4: alertQueuePriority4.offer(alert); break;
-                    case 5: alertQueuePriority5.offer(alert); break;
+                    case 1: alertQueuePriority1.queue(alert); break;
+                    case 2: alertQueuePriority2.queue(alert); break;
+                    case 3: alertQueuePriority3.queue(alert); break;
+                    case 4: alertQueuePriority4.queue(alert); break;
+                    case 5: alertQueuePriority5.queue(alert); break;
                 }
             }
 
