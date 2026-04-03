@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
@@ -5,6 +6,11 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PatientTest {
+
+    @BeforeEach
+    void preTest(){
+        Main.setupSimForTests();
+    }
 
     @Test
     void getDateOfBirth() {
@@ -32,5 +38,25 @@ class PatientTest {
         Patient patient = new Patient();
         Patient patient1 = new Patient();
         assertNotSame(patient.getUuid(), patient1.getUuid(), "Duplicate UUIDs in different patients");
+    }
+
+    @Test
+    void addDevice(){
+        Patient patient = new Patient();
+        assertEquals(0, patient.getDeviceList().length(), "Device list should be empty");
+        patient.addDevice(new DivTemperatureMonitor());
+        assertEquals(1, patient.getDeviceList().length(), "Device list has no devices");
+    }
+
+    @Test
+    void create(){
+        Patient patient = Patient.create();
+        assertTrue(patient.getDeviceList().length() != 0, "Device list has no devices");
+    }
+
+    @Test
+    void pollDevices(){
+        Patient patient = Patient.create();
+        //assertEquals(CacyQueue.class, patient.pollDevices().getClass(), "Didn't return a CacyQueue"); This won't work until the update CacyQueue
     }
 }

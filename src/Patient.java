@@ -7,8 +7,30 @@ public class Patient {
     private String name;
     private Date dateOfBirth;
 
+    private final CacyLinkedList<Device> deviceList;
+
     public Patient(){
         uuid = generateUUID();
+        deviceList = new CacyLinkedList<>();
+        //Default values for name & DoB
+        name = "John Doe";
+        dateOfBirth = new Date(0L);
+    }
+
+    public CacyQueue<Alert> pollDevices(){
+        CacyQueue<Alert> output = new CacyQueue<>();
+        deviceList.initIterator();
+        while (deviceList.hasNext()){
+            Observation observation = deviceList.next().sample();
+            if (observation.dangerous()){
+                output.queue(new Alert(Main.getSim().getCurrentTime(), observation));
+            }
+        }
+        return output;
+    }
+
+    public void addDevice(Device device){
+        deviceList.add(device);
     }
 
     private static UUID generateUUID(){
@@ -35,6 +57,24 @@ public class Patient {
         //Note: stores the name in all lowercase to ignore case
         this.name = name.toLowerCase(Locale.US);
     }
+
+    public CacyLinkedList<Device> getDeviceList() {
+        return deviceList;
+    }
+
+    public static Patient create(){
+        Patient patient = new Patient();
+
+        patient.addDevice(new DivHeartRateMonitor());
+        patient.addDevice(new DivOxygenSaturationMonitor());
+        patient.addDevice(new DivRespirationMonitor());
+        patient.addDevice(new DivTemperatureMonitor());
+        patient.addDevice(new DivCallBell());
+        patient.addDevice(new DivBloodPressure());
+
+        return patient;
+    }
+
 
     @Override
     public String toString() {
