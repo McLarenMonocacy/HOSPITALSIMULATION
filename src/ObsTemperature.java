@@ -3,9 +3,10 @@ public class ObsTemperature extends Observation{
 
     public ObsTemperature(double cVal){
         celsiusValue = cVal;
-
-        if (celsiusValue >= 40.6) priority = 4;
+        int priority;
+        if (cVal >= 40.6) priority = 4;
         else priority = 3;
+        super(priority, false, priority);
     }
 
     //Source: https:https://www.hopkinsmedicine.org/health/conditions-and-diseases/vital-signs-body-temperature-pulse-rate-respiration-rate-blood-pressure

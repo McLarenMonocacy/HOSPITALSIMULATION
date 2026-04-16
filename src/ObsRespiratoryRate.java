@@ -3,7 +3,7 @@ public class ObsRespiratoryRate extends Observation{
 
     public ObsRespiratoryRate(int breaths){
         bpm = breaths;
-        priority = 4;
+        super (4,false,4);
     }
 
     //Source:https://www.lung.org/blog/respiratory-rate-vital-signs
