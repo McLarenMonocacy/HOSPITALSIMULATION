@@ -84,4 +84,8 @@ public class Hospital {
     public int patientCount(){
         return patientList.length();
     }
+
+    public int waitingNurses(){
+        return waitingNurses.length();
+    }
 }
