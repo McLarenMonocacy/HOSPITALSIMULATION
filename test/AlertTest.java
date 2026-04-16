@@ -7,17 +7,27 @@ class AlertTest {
 
     @BeforeEach
     void preTest(){
-        Simulation simulation = new Simulation();
-        simulation.setup();
+        Main.setupSimForTests();
     }
 
     @Test
-    void resolve() {
-        Alert alert = new Alert(4, new DivTemperatureMonitor().sample());
-        alert.resolve(5);
-        assertEquals(4,alert.getStartTime(), "Start time not stored properly");
-        assertEquals(5,alert.getEndTime(), "End time not stored properly");
-        alert.resolve(84384);
-        assertEquals(5,alert.getEndTime(), "End time was overridden");
+    void resolved() {
+        Alert alert = new Alert(-1, new ObsTemperature(1));
+        alert.assignNurse(new Nurse(20));
+        alert.attemptResolve();
+        assertEquals(-1,alert.getStartTime(), "Start time not stored properly");
+        assertEquals(0,alert.getEndTime(), "End time not stored properly");
+    }
+
+    @Test
+    void assignNurse(){
+        Alert alert = new Alert(1, new ObsTemperature(1));
+        assertEquals(0,alert.getNumbNurses());
+        alert.assignNurse(new Nurse(20));
+        assertEquals(1,alert.getNumbNurses());
+        alert.assignNurse(new Nurse(20));
+        assertEquals(2,alert.getNumbNurses());
+        alert.attemptResolve();
+        assertEquals(0, alert.getNumbNurses());
     }
 }
