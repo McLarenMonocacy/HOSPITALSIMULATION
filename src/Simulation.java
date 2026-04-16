@@ -51,10 +51,10 @@ public class Simulation {
         return currentTime;
     }
 
-    public static double random(){
+    public static double randomDouble(){
         return random.nextDouble();
     }
-    public static double random(double bounds){
+    public static double randomDouble(double bounds){
         return random.nextDouble(bounds);
     }
     public static int randomInt(int minValue, int maxValue){
