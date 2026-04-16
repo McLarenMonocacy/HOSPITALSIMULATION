@@ -9,6 +9,8 @@ public class Hospital {
     private final CacyQueue<Alert> alertQueuePriority4;
     private final CacyQueue<Alert> alertQueuePriority5;
 
+    private final CacyLinkedList<Alert> alertsInProgress;
+
     public Hospital(){
         patientList = new CacyLinkedList<>();
         waitingNurses = new CacyQueue<>();
@@ -17,6 +19,7 @@ public class Hospital {
         alertQueuePriority3 = new CacyQueue<>();
         alertQueuePriority4 = new CacyQueue<>();
         alertQueuePriority5 = new CacyQueue<>();
+        alertsInProgress = new CacyLinkedList<>();
     }
 
     public void addPatient(Patient patient){
@@ -45,6 +48,26 @@ public class Hospital {
                 }
             }
 
+        }
+    }
+
+    public void runNurses(){
+        while (waitingNurses.length() > 0){
+            Alert alert = getNextAlert();
+            if (alert == null) break; //There are no alerts to be worked on
+            alert.assignNurse(waitingNurses.dequeue());
+            alertsInProgress.add(alert);
+        }
+        CacyQueue<Alert> alertsMarkedResolved = new CacyQueue<>();
+        alertsInProgress.initIterator();
+        while (alertsInProgress.hasNext()){
+            Alert alert = alertsInProgress.next();
+            if (alert.attemptResolve()){
+                alertsMarkedResolved.queue(alert);
+            }
+        }
+        while (alertsMarkedResolved.length() > 0){ //remove any resolved alerts
+            Main.getSim().addResolvedAlert(alertsInProgress.remove(alertsMarkedResolved.dequeue()));
         }
     }
 

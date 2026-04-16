@@ -9,6 +9,7 @@ public class Simulation {
     private Hospital hospital;
     private Double runTime, currentTime;
 
+    private CacyLinkedList<Alert> resolvedAlerts;
 
     public Simulation(){
     }
@@ -22,6 +23,7 @@ public class Simulation {
         this.runTime = runTime;
         currentTime = 0d;
 
+        resolvedAlerts = new CacyLinkedList<>();
 
         hasSetupRun = true;
     }
@@ -42,7 +44,9 @@ public class Simulation {
         if (!hasSimulationRun) return; //Can't process what hasn't happened
     }
 
-
+    public void addResolvedAlert(Alert alert){
+        resolvedAlerts.add(alert);
+    }
 
     public Hospital getHospital() {
         return hospital;
