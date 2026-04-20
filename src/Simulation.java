@@ -17,9 +17,9 @@ public class Simulation {
     }
 
     public void setup(){
-        setup(5L, 100);
+        setup(5L, 100, false);
     }
-    public void setup(Long rngSeed, double runTime){
+    public void setup(Long rngSeed, double runTime, boolean isForTests){
         random = new Random(rngSeed);
         hospital = new Hospital();
         this.runTime = runTime;
@@ -27,9 +27,11 @@ public class Simulation {
 
         resolvedAlerts = new CacyLinkedList<>();
 
-        for (int i = 0; i < 10; i++) {
-            hospital.addPatient(Patient.create());
-            hospital.addNurse(new Nurse(Simulation.randomInt(10)));
+        if (!isForTests){
+            for (int i = 0; i < 10; i++) {
+                hospital.addPatient(Patient.create());
+                hospital.addNurse(new Nurse(Simulation.randomInt(10)));
+            }
         }
 
         hasSetupRun = true;
