@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 
 public class Simulation {
@@ -25,6 +27,11 @@ public class Simulation {
 
         resolvedAlerts = new CacyLinkedList<>();
 
+        for (int i = 0; i < 10; i++) {
+            hospital.addPatient(Patient.create());
+            hospital.addNurse(new Nurse(Simulation.randomInt(10)));
+        }
+
         hasSetupRun = true;
     }
 
@@ -33,6 +40,7 @@ public class Simulation {
 
         while (currentTime < runTime){
             hospital.pollDevices();
+            hospital.runNurses();
             currentTime++; //Temp time advance until a proper solution
         }
 
@@ -42,6 +50,17 @@ public class Simulation {
 
     public void process(){
         if (!hasSimulationRun) return; //Can't process what hasn't happened
+        try {
+
+            FileWriter writer = new FileWriter("output.txt");
+            resolvedAlerts.initIterator();
+            while (resolvedAlerts.hasNext()){
+                Alert alert = resolvedAlerts.next();
+                writer.append(alert.getStartTime() + "," + alert.getEndTime() + "," + alert.getDifficulty() + "," + alert.getDuration() + "\n");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void addResolvedAlert(Alert alert){
