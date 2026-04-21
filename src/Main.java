@@ -5,6 +5,11 @@ public class Main {
         return sim;
     }
 
+    public static void setupSimForTests(){
+        sim = new Simulation();
+        sim.setup();
+    }
+
     public static void main(String[] args) {
         sim = new Simulation();
         sim.setup();
