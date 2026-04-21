@@ -7,7 +7,7 @@ public class Main {
 
     public static void setupSimForTests(){
         sim = new Simulation();
-        sim.setup();
+        sim.setup(0L, 50, true);
     }
 
     public static void main(String[] args) {

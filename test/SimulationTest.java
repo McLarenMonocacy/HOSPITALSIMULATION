@@ -14,12 +14,12 @@ class SimulationTest {
     }
 
     @Test
-    void randomDouble(){
+    void randomDoubleDouble(){
         Simulation sim = new Simulation();
         sim.setup();
-        double firstValue = Simulation.random();
+        double firstValue = Simulation.randomDouble();
         sim.setup();
-        assertEquals(firstValue, Simulation.random(), "Simulation rng is not seeded properly");
+        assertEquals(firstValue, Simulation.randomDouble(), "Simulation rng is not seeded properly");
     }
 
 }

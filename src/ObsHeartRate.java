@@ -3,7 +3,7 @@ public class ObsHeartRate extends Observation{
     
     public ObsHeartRate(double beats){
         bpm = beats;
-        priority = 4;
+        super(4,false,3);
     }
 
     //Source:https://www.healthline.com/health/dangerous-heart-rate#diagnosing-the-cause

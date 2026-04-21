@@ -12,6 +12,8 @@ public class CacyLinkedList<T>{
     private Record tail;
     private Record iterator;
 
+    private boolean removeSuccessFlag;
+
     public void add (T t){
         if (t == null) return; //Don't allow null objects to be added
         Record newRecord = new Record(t);
@@ -32,13 +34,20 @@ public class CacyLinkedList<T>{
         head = newRecord;
     }
 
-    public void remove(T t) {
-        if (t == null) return; //Cannot remove null
+    public T remove(T t) {
+        //Returns T if T is removed from the list, otherwise returns null
+        if (t == null) return null; //Cannot remove null
+        removeSuccessFlag = false;
         head = remove(head,t);
         if (head == null) tail = null;
+        if (removeSuccessFlag) return t;
+        else return null;
     }
     private Record remove(Record recordToCheck, T t){
-        if (recordToCheck.t.equals(t)) return recordToCheck.nextRecord; //We are the record to remove and thus the previous record's next record should be our next record
+        if (recordToCheck.t.equals(t)){
+            removeSuccessFlag = true;
+            return recordToCheck.nextRecord; //We are the record to remove and thus the previous record's next record should be our next record
+        }
         if (recordToCheck.nextRecord != null){ //If the next record is null then were are at the end of the list and have nothing left to check
             Record result = remove(recordToCheck.nextRecord, t); //Check the next record
             if (result == null) tail = recordToCheck; //We get null if the next record is both the record to remove and the tail thus we are the new tail

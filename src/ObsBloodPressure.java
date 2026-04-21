@@ -5,7 +5,7 @@ public class ObsBloodPressure extends Observation{
     public ObsBloodPressure(int systolic, int diastolic){
         this.systolic = systolic;
         this.diastolic = diastolic;
-        priority = 3;
+        super(3,false, 2);
     }
 
     //Source: https://my.clevelandclinic.org/health/diagnostics/17649-blood-pressure
@@ -19,6 +19,6 @@ public class ObsBloodPressure extends Observation{
 
     @Override
     public String data() {
-        return "";
+        return "Blood pressure: " + systolic + "/" + diastolic + ".";
     }
 }
